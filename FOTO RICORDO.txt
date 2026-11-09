@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Galleon Pizzeria - La Tua Foto Ricordo Gratis a Casa!</title>
+  
+  <!-- Font Google & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0c;
+      --card-bg: rgba(22, 22, 29, 0.75);
+      --accent-gold: #ffb703;
+      --accent-glow: #fb8500;
+      --whatsapp-green: #25d366;
+      --whatsapp-hover: #1eaa53;
+      --text-main: #f8f9fa;
+      --text-muted: #a0a0b2;
+      --border-glow: rgba(255, 183, 3, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(251, 133, 0, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(255, 183, 3, 0.08) 0%, transparent 45%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 15px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glow);
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 183, 3, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(251, 133, 0, 0.2));
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.95rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    /* Banner Spedizione Gratuita */
+    .delivery-banner {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(255, 183, 3, 0.1));
+      border-left: 4px solid var(--whatsapp-green);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .delivery-banner i {
+      font-size: 1.5rem;
+      color: var(--whatsapp-green);
+    }
+
+    .delivery-banner p {
+      font-size: 0.83rem;
+      color: #e2e2e9;
+      line-height: 1.35;
+    }
+
+    .delivery-banner strong {
+      color: #fff;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-box {
+      position: relative;
+    }
+
+    .input-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    input, select {
+      width: 100%;
+      background: rgba(10, 10, 12, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 13px 14px 13px 42px;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 12px rgba(255, 183, 3, 0.25);
+      background: rgba(10, 10, 12, 0.85);
+    }
+
+    /* Input Foto Personalizzato */
+    .file-dropzone {
+      border: 2px dashed rgba(255, 183, 3, 0.35);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      background: rgba(255, 183, 3, 0.03);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .file-dropzone:hover {
+      border-color: var(--accent-gold);
+      background: rgba(255, 183, 3, 0.08);
+    }
+
+    .file-dropzone i {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+    }
+
+    .file-dropzone p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .file-dropzone input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    #preview-img {
+      max-height: 130px;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Tasto Invia WhatsApp */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(37, 211, 102, 0.45);
+    }
+
+    /* Pop-up Modale */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: #141419;
+      border: 1px solid var(--whatsapp-green);
+      border-radius: 24px;
+      padding: 30px 22px;
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      transform: scale(0.85);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(37, 211, 102, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+      color: var(--whatsapp-green);
+      font-size: 2.2rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .loader-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loader-progress {
+      height: 100%;
+      width: 0%;
+      background: var(--whatsapp-green);
+      transition: width 2s linear;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="header-badge">
+        <i class="fa-solid fa-gift"></i> Foto Ricordo in Omaggio
+      </div>
+      <h1 class="title">The Galleon Pizzeria</h1>
+      <p class="subtitle">Scatta la foto stasera, ricevi la stampa a casa!</p>
+    </div>
+
+    <!-- Banner informativo spedizione -->
+    <div class="delivery-banner">
+      <i class="fa-solid fa-truck-fast"></i>
+      <p><strong>Spedizione a Casa Gratuita!</strong><br>Inserisci i dati qui sotto: ti manderemo la foto stampata direttamente al tuo indirizzo.</p>
+    </div>
+
+    <form id="photoForm">
+      <!-- Nome e Cognome -->
+      <div class="form-group">
+        <label for="name">Nome e Cognome</label>
+        <div class="input-box">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="name" placeholder="Es. Mario Rossi" required>
+        </div>
+      </div>
+
+      <!-- Indirizzo -->
+      <div class="form-group">
+        <label for="address">Indirizzo di spedizione</label>
+        <div class="input-box">
+          <i class="fa-solid fa-house"></i>
+          <input type="text" id="address" placeholder="Via, Civico, Città e CAP" required>
+        </div>
+      </div>
+
+      <!-- Occasione -->
+      <div class="form-group">
+        <label for="occasion">Cosa festeggi stasera?</label>
+        <div class="input-box">
+          <i class="fa-solid fa-cake-candles"></i>
+          <select id="occasion">
+            <option value="Compleanno 🎂">Compleanno 🎂</option>
+            <option value="Cena in Compagnia 🍕">Cena in Compagnia 🍕</option>
+            <option value="Anniversario ❤️">Anniversario ❤️</option>
+            <option value="Festa di Laurea 🎓">Festa di Laurea 🎓</option>
+            <option value="Serata Speciale ✨">Serata Speciale ✨</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Caricamento Foto -->
+      <div class="form-group">
+        <label>Carica la tua Foto 📸</label>
+        <div class="file-dropzone">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <p id="file-label">Tocca qui per scattare o scegliere la foto</p>
+          <input type="file" id="photo" accept="image/*" required>
+          <img id="preview-img" alt="Anteprima Foto">
+        </div>
+      </div>
+
+      <!-- Pulsante di invio -->
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i>
+        INVIA FOTO SU WHATSAPP
+      </button>
+    </form>
+  </div>
+
+  <!-- Pop-up Modale Reindirizzamento -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <div class="modal-icon">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+      <h3 class="modal-title" id="modalTitle">Caricamento Foto...</h3>
+      <p class="modal-desc" id="modalDesc">Stiamo preparando l'immagine. A breve si aprirà WhatsApp per inviare i dati!</p>
+      <div class="loader-bar">
+        <div class="loader-progress" id="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const photoInput = document.getElementById('photo');
+    const previewImg = document.getElementById('preview-img');
+    const fileLabel = document.getElementById('file-label');
+    const form = document.getElementById('photoForm');
+    const modal = document.getElementById('modal');
+    const progress = document.getElementById('progress');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+
+    // Anteprima Immagine
+    photoInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          previewImg.src = evt.target.result;
+          previewImg.style.display = 'block';
+          fileLabel.innerText = "Foto selezionata: " + file.name;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Gestione Invio Form
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const occasion = document.getElementById('occasion').value;
+      const photoFile = photoInput.files[0];
+
+      // Mostra Pop-up
+      modal.classList.add('active');
+      progress.style.width = '30%';
+
+      let photoUrl = "";
+
+      // Caricamento Immagine su Imgur API
+      try {
+        const formData = new FormData();
+        formData.append('image', photoFile);
+
+        const response = await fetch('https://api.imgur.com/3/image', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Client-ID 54472a507d3f810' // Client-ID demo anonimo gratuito
+          },
+          body: formData
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          photoUrl = data.data.link;
+        } else {
+          photoUrl = "[Foto allegata manualmente]";
+        }
+      } catch (err) {
+        photoUrl = "[Foto allegata manualmente]";
+      }
+
+      // Aggiorna Pop-up
+      progress.style.width = '100%';
+      modalTitle.innerText = "Apertura WhatsApp...";
+      modalDesc.innerText = "Premi INVIA nella chat che si aprirà per confermare la stampa a casa!";
+
+      // Costruzione messaggio WhatsApp per 3391318613
+      const textMessage = `Ciao The Galleon! 🍕%0AHo compilato la richiesta per la Foto Ricordo stampata a casa:%0A%0A👤 *Nome:* ${encodeURIComponent(name)}%0A🏠 *Indirizzo:* ${encodeURIComponent(address)}%0A🎉 *Occasione:* ${encodeURIComponent(occasion)}%0A📸 *Link Foto:* ${encodeURIComponent(photoUrl)}`;
+      
+      const whatsappUrl = `https://wa.me/393391318613?text=${textMessage}`;
+
+      // Reindirizzamento WhatsApp dopo 1.2 secondi
+      setTimeout(() => {
+        window.location.href = whatsappUrl;
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
